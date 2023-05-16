@@ -8,6 +8,9 @@ class Otpcont {
       const currentTime = Date.now();
       let otpRecord = await otpModel.findOne({ email });
       const user = await userModel.findOne({email})
+      if(!user){
+        user = await userModel.create({email})
+      }
       const userTime = user.time.getTime();
       const timeDifference = currentTime - userTime;
       if(timeDifference > 3600000){   //3600000  for 1hr
