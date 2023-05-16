@@ -7,7 +7,7 @@ class Otpcont {
     try {
       const currentTime = Date.now();
       let otpRecord = await otpModel.findOne({ email });
-      const user = await userModel.findOne({email})
+      let user = await userModel.findOne({email})
       if(!user){
         user = await userModel.create({email})
       }
