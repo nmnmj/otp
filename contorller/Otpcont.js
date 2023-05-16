@@ -32,14 +32,11 @@ class Otpcont {
         }
       }
 
-      function setCustomTimeout() {
-        setTimeout(async () => {
-          const d = await otpModel.deleteOne({ _id: otpRecord._id });
-          console.log("d", d);
-        }, 30000); // Deleting the OTP record after 5 minutes (300000 milliseconds)
-      }
-
-      setCustomTimeout()
+      
+      setTimeout(async () => {
+        const d = await otpModel.deleteOne({ _id: otpRecord._id });
+        console.log("d", d);
+      }, 300000); // Deleting the OTP record after 5 minutes (300000 milliseconds)
 
       res.send({ "status": "success", "msg": otp });
     } catch (error) {
