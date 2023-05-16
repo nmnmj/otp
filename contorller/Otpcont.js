@@ -35,22 +35,16 @@ class Otpcont {
           await userModel.findOneAndUpdate({ email }, { attempt: 0, time: currentTime });
         } else {
           otpRecord = await otpModel.create({ otp, email, time: currentTime });
-          const r = await userModel.findOne({ email });
-          if (!r) {
-            await userModel.create({ email });
-          }
+          // const r = await userModel.findOne({ email });
+          // if (!r) {
+          //   await userModel.create({ email });
+          // }
         }
-  
-        
-        setTimeout(async () => {
-          const d = await otpModel.deleteOne({ _id: otpRecord._id });
-          console.log("d", d);
-        }, 300000); // Deleting the OTP record after 5 minutes (300000 milliseconds)
   
         res.send({ "status": "success", "msg": otp });
 
       }else{
-        res.status(401).send({"status":"success", "msg":"Your account is temporarily blocked. Please try again after 1 hour."})
+        res.status(401).send({"status":"failed", "msg":"Your account is temporarily blocked. Please try again after 1 hour."})
       }
 
     } catch (error) {
