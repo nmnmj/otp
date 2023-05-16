@@ -106,7 +106,7 @@ export default Otpcont;
 function generateOTP() {
   let otp = "";
   for (let i = 0; i < 4; i++) {
-    let n = Math.floor(Math.random() * 10);
+    let n = Math.floor(Math.random() * 9) + 1;
     n = n.toString();
     otp += n;
   }
